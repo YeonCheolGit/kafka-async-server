@@ -7,3 +7,4 @@
 ## Introduction
 Asynchronous server for [springboot-restful-board](https://github.com/YeonCheolGit/springboot-restful-api-board)
 
+![image](https://user-images.githubusercontent.com/65603611/130247650-534d1fbc-d904-49cc-bae7-762fd1ac672d.png)
