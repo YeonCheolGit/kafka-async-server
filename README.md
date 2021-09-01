@@ -5,6 +5,7 @@
 ![Generic badge](https://img.shields.io/badge/Kafka-2.7.6-blue.svg)
 
 ## Introduction
-Asynchronous server for [springboot-restful-board](https://github.com/YeonCheolGit/springboot-restful-api-board)
+Asynchronous server from [springboot-restful-board](https://github.com/YeonCheolGit/springboot-restful-api-board)
 
-![image](https://user-images.githubusercontent.com/65603611/130247650-534d1fbc-d904-49cc-bae7-762fd1ac672d.png)
+## Kafka server
+![image](https://user-images.githubusercontent.com/65603611/131687448-2e6c8292-e9ef-42af-a4f4-1931cd6887b8.png)

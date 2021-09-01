@@ -1,10 +1,10 @@
 package com.example.springboot.service.kafka;
 
+import com.example.springboot.DTO.kafka.PostViewCountDTO;
 import com.example.springboot.DTO.kafka.SearchedTitleDTO;
 import com.example.springboot.repository.PostRepository;
 import com.example.springboot.repository.SearchedTitleRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.scheduling.annotation.Async;
@@ -21,19 +21,18 @@ public class KafkaConsumerService {
     private static final String groupId = "yeon";
 
     @Async
-    @KafkaListener(topics = topic_viewCount, groupId = groupId)
-    public void consume(@Payload String string) {
+    @KafkaListener(topics = topic_viewCount, groupId = groupId, containerFactory = "postViewCountListener")
+    public void consume(@Payload PostViewCountDTO postViewCountDTO) {
         System.out.println("========================================");
         System.out.println("viewCount");
-//        System.out.printf("Consumed message : %s%n", postViewCountDTO.getPostNo());
-        System.out.println(string);
+        System.out.printf("Consumed message : %s%n", postViewCountDTO.getPostNo());
         System.out.println("========================================");
 
-//        postRepository.updateViewCount(postViewCountDTO.getPostNo());
+        postRepository.updateViewCount(postViewCountDTO.getPostNo());
     }
 
     @Async
-    @KafkaListener(topics = topic_saveSearchTitle, groupId = groupId)
+    @KafkaListener(topics = topic_saveSearchTitle, groupId = groupId, containerFactory = "searchedTitleListener")
     public void consume(@Payload SearchedTitleDTO title) {
         System.out.println("========================================");
         System.out.println("searched");

@@ -25,9 +25,16 @@ bootJar {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-    implementation 'org.springframework.kafka:spring-kafka:2.7.6'
     implementation 'org.springframework.boot:spring-boot-starter-web:2.5.3'
     implementation 'junit:junit:4.13.1'
+
+    // Kafka
+    implementation 'org.springframework.kafka:spring-kafka:2.7.0'
+    implementation 'org.apache.kafka:kafka-clients:2.8.0'
+    implementation 'org.apache.kafka:kafka_2.13:2.8.0'
+
+    // jackson
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.12.5'
 
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'mysql:mysql-connector-java'

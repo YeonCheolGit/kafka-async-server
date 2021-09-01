@@ -5,9 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.kafka.core.DefaultKafkaProducerFactory;
-import org.springframework.kafka.core.KafkaTemplate;
-import org.springframework.kafka.core.ProducerFactory;
+import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
+import org.springframework.kafka.core.*;
 
 import java.util.Map;
 
@@ -19,17 +18,19 @@ public class SearchedTitleConsumerConfig {
     private String bootstrapServer;
 
     @Bean
-    public Map<String,Object> searchedTitle_ProducerConfigs() {
-        return JsonDeserializer.getStringObjectMap(bootstrapServer);
+    public Map<String,Object> searchedTitle_ConsumerConfigs() {
+        return CommonJsonDeserializer.getStringObjectMap(bootstrapServer);
     }
 
     @Bean
-    public ProducerFactory<String, SearchedTitleDTO> searchedTitleDTO_ProducerFactory() {
-        return new DefaultKafkaProducerFactory<>(searchedTitle_ProducerConfigs());
+    public ConsumerFactory<String, SearchedTitleDTO> searchedTitleDTO_ConsumerFactory() {
+        return new DefaultKafkaConsumerFactory<>(searchedTitle_ConsumerConfigs());
     }
 
     @Bean
-    public KafkaTemplate<String, SearchedTitleDTO> searchedTitleDTO_ProducerTemplate() {
-        return new KafkaTemplate<>(searchedTitleDTO_ProducerFactory());
+    public ConcurrentKafkaListenerContainerFactory<String, SearchedTitleDTO> searchedTitleListener() {
+        ConcurrentKafkaListenerContainerFactory<String, SearchedTitleDTO> factory = new ConcurrentKafkaListenerContainerFactory<>();
+        factory.setConsumerFactory(searchedTitleDTO_ConsumerFactory());
+        return factory;
     }
 }
